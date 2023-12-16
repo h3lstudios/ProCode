@@ -1,13 +1,10 @@
 import re
+import requests
 
 class ProCodeInterpreter:
     def __init__(self):
         self.variables = {}
-
-    def interpret_file(self, file_path):
-        with open(file_path, 'r') as file:
-            code = file.read()
-            self.interpret(code)
+        self.session = requests.Session()  # Create an HTTP session for API requests
 
     def interpret(self, code):
         lines = code.split('\n')
@@ -21,6 +18,8 @@ class ProCodeInterpreter:
                 self.handle_assignment(line)
             elif line.startswith("print"):
                 self.handle_print(line)
+            elif line.startswith("request"):
+                self.handle_request(line)
 
     def handle_class_declaration(self, line):
         class_name = re.search(r'class (\w+)', line).group(1)
@@ -43,3 +42,11 @@ class ProCodeInterpreter:
         class_name, prop_name = var_name.split('.')
         value = self.variables[class_name][prop_name]
         print(value)
+
+    def handle_request(self, line):
+        url = line.split('(')[-1].split(')')[0].strip()
+        response = self.session.get(url)
+        if response.status_code == 200:
+            print(response.text)
+        else:
+            print(f"Request failed with status code {response.status_code}")
