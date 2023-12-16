@@ -1,0 +1,9 @@
+from procode import ProCodeInterpreter as PCI
+
+
+procode_code = """
+// Input code here
+"""
+
+interpreter = PCI()
+interpreter.interpret(procode_code)
