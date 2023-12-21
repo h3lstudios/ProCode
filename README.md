@@ -16,7 +16,7 @@
 
 ###
 
-<p align="left">ProCode is a programming language designed for educational use and easy coding use while making outstanding projects. It focuses on providing a clear and straightforward way to express code.</p>
+<p align="left">ProCode is a programming language designed for educational use and easy coding use while making outstanding projects.</p>
 
 ###
 
